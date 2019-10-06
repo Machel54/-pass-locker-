@@ -12,4 +12,13 @@ class TestUser(unittest.TestCase):
       '''
       self.new_cred = Creds("Twitter","injust2")
 
+    def test_init(self):
+      '''
+      test_init checks if the object is initialised properly
+      '''
+      self.assertEqual(self.new_cred.account_name,"Twitter")
+      self.assertEqual(self.new_cred.password,"injust2")
+
+    
+
 
