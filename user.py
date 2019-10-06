@@ -4,6 +4,6 @@ class User:
   '''
   user_list = [] #Empty user list
 
-def _init_(self, username, password):
-  self.username = username
+def _init_(self, user_name, password):
+  self.username = user_name
   self.password = password
