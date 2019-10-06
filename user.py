@@ -1,9 +1,9 @@
 class User:
-  '''
-  Class that generates new users
-  '''
-  user_list = [] #Empty user list
+    """
+    Class that generates new users
+    """
+    user_list = []
 
-def _init_(self, user_name, password):
-  self.username = user_name
-  self.password = password
+    def __init__(self,username,password):
+      self.username = username
+      self.password = password
