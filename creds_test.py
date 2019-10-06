@@ -19,7 +19,18 @@ class TestUser(unittest.TestCase):
       self.assertEqual(self.new_cred.account_name,"Twitter")
       self.assertEqual(self.new_cred.password,"injust2")
 
-    
+    def tearDown(self):
+      '''
+       TearDown method that does clean up after each test case has run.
+      '''
+      Creds.creds_list = []
+
+    def test_save_cred(self):
+      '''
+      test_save_cred tests if a new credential has been added to the creds_list 
+      '''
+      self.new_cred.save_cred()
+      self.assertEqual(len(Creds.creds_list),1)
 
 
 if __name__ == '__main__':
