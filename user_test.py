@@ -32,15 +32,23 @@ class TestUser(unittest.TestCase):
         '''
         self.new_user.save_user()
         self.assertEqual(len(User.user_list),1)
-
-    def test_save_multiple_user(self):
+    def test_find_user_by_name(self):
         '''
-        test_save_multiple_user to check if we can save multiple user object to our user_list
+        test to check if we can find a user by name and display information
         '''
         self.new_user.save_user()
-        test_user = User("Machel", "mk12")
-        test_user.save_user()
-        self.assertEqual(len(User.user_list),2)
+        # test_user = User("user","mk12")
+        # test_user.save_user()
+
+        found_user = User.find_by_name('Machel')
+
+        self.assertEqual(found_user.username,self.new_user.username)
+    # def test_user_exists(self):
+    #     '''
+    #     test to check if we
+    #     '''
+
+
 
 if __name__ == '__main__':
      unittest.main()
