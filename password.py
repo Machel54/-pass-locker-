@@ -1,5 +1,6 @@
 #/usr/bin/env python3.6
 from user import User
+from  credentials import Credential
 
 def create_user(user_name,password):
     '''
@@ -26,14 +27,129 @@ def find_user(name):
     '''
     return User.find_by_name(name)
 
-def check_existing_users(name):
+def existing_users(username,password):
     '''
     Function that check if a user exists with that user and return a Boolean
     '''
-    return User.user_exist(name)
+    check_user = User.user_exist(username, password)
+    return check_user
 
 def display_users():
     '''
     Function that returns all the saved user
     '''
     return User.display_user()
+
+def generate_password(self):
+    '''
+    Fucntioin that generates password.
+    '''
+    gen_password = Credential.generate_password(self)
+    return gen_password
+
+def create_credential(user_name,sitename,password):
+    '''
+    Function that creates new credentials.
+    '''
+    new_credential = Credential(user_name,sitename,password)
+    return new_credential
+def find_by_sitename(sitename):
+    '''
+    Function that searches for a site name.
+    '''
+    return Credential.find_by_sitename(sitename)
+
+def save_credential(credential):
+    '''
+    Function to save a newly created credential.
+    '''
+    Credential.save_credential(credential)
+
+def check_existing_credentials(sitename):
+    '''
+    Function that checks if a credential exists.
+    '''
+    return Credential.credential_exist(sitename)
+
+def copy_credential(sitename):
+    '''
+    Function that copies credentials details to the clipborad.
+    '''
+    return Credential.copy_credential(sitename)
+
+
+def display_credentials(username):
+    '''
+    Fucntion to display credentials saved.
+    '''
+    return Credential.display_credential(username)
+
+#Main function
+def main():
+    print("PASSWORD LOCKER... Welcome")
+    while True:
+        print("What would you like to do? \n cr - Create Account, lg - login, ex - exit the program")
+        short_code = input().lower()
+       
+        if short_code == 'cr':
+            print('\n')
+            user_name = input("Enter your user name:")
+            password = input("Type your password:")
+            save_user(create_user(user_name,password))
+            print(f"Account has been created for {user_name }")
+        elif short_code == 'ex':
+                        break    
+            
+        elif short_code == 'lg':
+            print('\n')
+            print("Enter your login details")
+            user_name = input("Enter your user name:")
+            # sitename = input("Enter your sitename:")
+            password = input("Type your password:")
+            exist = existing_users(user_name, password)
+            if exist == user_name:
+                print(f"You are succesfully logged in {user_name}")
+                while True:
+                    print("Navigation codes: \n cc - create credential, \n dc - display credential, \n fd - find credential, \n cp -copy credential \n ec - exit")
+                    short_code = input('select a choice: ').lower()
+                    if short_code == 'ec':
+                        break  
+                    elif short_code == 'cc':
+                        print("Enter your credential details")
+                        sitename = input("Enter site: ")
+                        user_name = input("Enter username: ")
+                        # password = input("Enter password:")
+                        create_credential(user_name,sitename,password)
+                        save_credential(create_credential(user_name,sitename,password))
+                        while True:
+                                print("Choose the password method you would like. Use keys: \n ep - To enter a password \n gp - To generate a password \n ex - exit")
+                                password_choice = input("Enter an option: ").lower().strip()
+                                if password_choice == 'ep':
+                                    print('\n')
+                                    password = input("Enter your password:").strip()
+                                    break
+                                elif password_choice == 'gp':
+                                    password = generate_password(password)
+                                    break
+                    elif short_code == 'dc':
+                        if display_credentials(user_name):
+                            print("This is  a list of all your credentials:")
+                            for credential in display_credentials(user_name):
+                                print(f"Site name: {credential.sitename} - user name: {credential.username} - Password {credential.password}")
+                        else:
+                            print("You dont seem to have any credentials saved")
+
+                    elif short_code == 'fd':
+                        search_site = input("Type the site name you are looking for:")
+                        if existing_users(user_name,password):
+                            result = find_by_sitename(search_site)
+                            print(f"Search result: Site: {result.sitename} - username: {result.username} - Password: {result.password}") 
+                        else:
+                            print("No such credential exists. Try again!")
+                    
+                    elif short_code == 'cp':
+                        the_site = input("Enter the site name for the credential you want to copy: ")
+                        copy_credential(the_site)
+                    
+if __name__ == '__main__':
+    main()

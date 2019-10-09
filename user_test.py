@@ -1,4 +1,5 @@
 import unittest 
+import string
 from user import User
 
 class TestUser(unittest.TestCase):
@@ -60,7 +61,7 @@ class TestUser(unittest.TestCase):
         #  test_user = User('Machel')
         #  test_user.save_user()
 
-        user_exists = User.user_exist("Machel")
+        user_exists = User.user_exist("Machel","jkl54")
 
         self.assertTrue(user_exists)
 
