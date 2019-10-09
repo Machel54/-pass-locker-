@@ -135,7 +135,7 @@ def main():
                         if display_credentials(user_name):
                             print("This is  a list of all your credentials:")
                             for credential in display_credentials(user_name):
-                                print(f"Site name: {credential.sitename} - user name: {credential.username} - Password {credential.password}")
+                                print(f"Site name: {credential.sitename} - user name: {credential.username} - Password: {credential.password}")
                         else:
                             print("You dont seem to have any credentials saved")
 
